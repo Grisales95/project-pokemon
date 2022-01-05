@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import imgsRandom from '../../helpers/imgsRandom';
+import styled from "styled-components";
+import imgsRandom from "../../helpers/imgsRandom";
 
 const random = Math.round(Math.random() * (imgsRandom.length - 1));
 
@@ -17,7 +17,7 @@ export const LoginContainer = styled.div`
 
   &::before {
     background-color: rgba(0, 0, 0, 0.4);
-    content: '';
+    content: "";
     height: 100%;
     left: 0;
     position: absolute;
@@ -50,11 +50,11 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 50px 0px;
+  margin: 40px 0px;
 `;
 
 export const InputForm = styled.input`
-  border: 1px solid gray;
+  border: 10px solid ${(props) => (props.error ? "red" : "gray")};
   border-radius: ${({ theme }) => theme.border};
   color: ${({ theme }) => theme.primary};
   margin: 10px;
@@ -63,7 +63,8 @@ export const InputForm = styled.input`
   width: 80%;
 
   &:focus {
-    outline: 1px solid ${({ theme }) => theme.primary};
+    outline: 2px solid ${({ theme }) => theme.primary};
+    border: 1px solid;
   }
 
   @media (max-width: 425px) {
@@ -91,4 +92,11 @@ export const ButtonForm = styled.button`
   @media (max-width: 425px) {
     width: 100%;
   }
+`;
+
+export const ErrorMsg = styled.p`
+  color: red;
+  font-size: 0.8rem;
+  font-weigth: bold;
+  margin-top: -5px;
 `;
