@@ -67,7 +67,7 @@ const Login = () => {
             name="password"
             handleInputChange={handleInputChange}
             data={password}
-            error={error.isErrorPassword && true}
+            error={error.isErrorPassword}
           />
           {error.isErrorPassword && (
             <ErrorMsg>

@@ -54,7 +54,7 @@ export const Form = styled.form`
 `;
 
 export const InputForm = styled.input`
-  border: 10px solid ${(props) => (props.error ? "red" : "gray")};
+  border: 2px solid ${({ error }) => error ? "red" : "gray"};
   border-radius: ${({ theme }) => theme.border};
   color: ${({ theme }) => theme.primary};
   margin: 10px;
@@ -63,8 +63,8 @@ export const InputForm = styled.input`
   width: 80%;
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.primary};
-    border: 1px solid;
+    /* outline: 2px solid ${({ theme }) => theme.primary}; */
+    border: 2px solid ${({ theme, error }) => error ? "red" : theme.primary};
   }
 
   @media (max-width: 425px) {
