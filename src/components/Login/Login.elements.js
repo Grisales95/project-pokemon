@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import imgsRandom from "../../helpers/imgsRandom";
+import styled from 'styled-components';
+import imgsRandom from '../../helpers/imgsRandom';
 
 const random = Math.round(Math.random() * (imgsRandom.length - 1));
 
@@ -17,7 +17,7 @@ export const LoginContainer = styled.div`
 
   &::before {
     background-color: rgba(0, 0, 0, 0.4);
-    content: "";
+    content: '';
     height: 100%;
     left: 0;
     position: absolute;
@@ -54,7 +54,7 @@ export const Form = styled.form`
 `;
 
 export const InputForm = styled.input`
-  border: 2px solid ${({ error }) => error ? "red" : "gray"};
+  border: 2px solid ${({ error }) => (error ? 'red' : 'gray')};
   border-radius: ${({ theme }) => theme.border};
   color: ${({ theme }) => theme.primary};
   margin: 10px;
@@ -63,8 +63,7 @@ export const InputForm = styled.input`
   width: 80%;
 
   &:focus {
-    /* outline: 2px solid ${({ theme }) => theme.primary}; */
-    border: 2px solid ${({ theme, error }) => error ? "red" : theme.primary};
+    border: 2px solid ${({ theme, error }) => (error ? 'red' : theme.primary)};
   }
 
   @media (max-width: 425px) {
@@ -95,8 +94,11 @@ export const ButtonForm = styled.button`
 `;
 
 export const ErrorMsg = styled.p`
-  color: red;
+  background-color: red;
+  border-radius: ${({ theme }) => theme.border};
+  color: #fff;
   font-size: 0.8rem;
-  font-weigth: bold;
+  font-weight: bold;
+  padding: 2px 5px;
   margin-top: -5px;
 `;

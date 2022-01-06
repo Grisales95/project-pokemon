@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from 'react';
 import {
   LoginContainer,
   LoginCard,
   Form,
   ButtonForm,
   ErrorMsg,
-} from "../components/Login/Login.elements";
-import pokemonLogo from "../assets/images/pokemon-logo.png";
-import Input from "../components/Login/Input";
-import formValidator from "../helpers/formValidator";
+} from '../components/Login/Login.elements';
+import pokemonLogo from '../assets/images/pokemon-logo.png';
+import Input from '../components/Login/Input';
+import formValidator from '../helpers/formValidator';
+import { LoginContext } from '../contexts/LoginProvider';
 
 const Login = () => {
+  const [, setIsLogin] = useContext(LoginContext);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const [error, setError] = useState({
@@ -34,43 +36,45 @@ const Login = () => {
     e.preventDefault();
     let formError = formValidator(formData);
     if (!formError?.isErrorFind) {
-      alert("Todo bien");
+      setIsLogin(true);
       setError({
         isErrorEmail: false,
         isErrorPassword: false,
       });
       return;
     }
-    alert("Todo malangas");
     setError(formError);
   };
 
   return (
     <LoginContainer>
       <LoginCard>
-        <img src={pokemonLogo} width="270px" alt="pokemon-logo" />
+        <img src={pokemonLogo} width='270px' alt='pokemon-logo' />
         <Form onSubmit={handleSubmit}>
           <Input
-            type="email"
-            text="Your email"
-            name="email"
+            type='email'
+            text='Your email'
+            name='email'
             handleInputChange={handleInputChange}
             data={email}
+            error={error.isErrorEmail}
           />
           {error.isErrorEmail && (
-            <ErrorMsg>Please enter a valid email address</ErrorMsg>
+            <ErrorMsg className='animate__animated animate__bounceIn'>
+              Please enter a valid email address
+            </ErrorMsg>
           )}
 
           <Input
-            type="password"
-            text="Your password"
-            name="password"
+            type='password'
+            text='Your password'
+            name='password'
             handleInputChange={handleInputChange}
             data={password}
             error={error.isErrorPassword}
           />
           {error.isErrorPassword && (
-            <ErrorMsg>
+            <ErrorMsg className='animate__animated animate__bounceIn'>
               password must be a minimum <br /> of 8 characters
             </ErrorMsg>
           )}
