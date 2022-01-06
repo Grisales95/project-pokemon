@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
   background-color: ${({ theme }) => theme.primary};
@@ -13,7 +13,7 @@ export const HomeContainer = styled.div`
   max-width: 80%;
 `;
 
-export const NavBar = styled.nav`
+export const NavBarStyled = styled.nav`
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -23,7 +23,7 @@ export const ListContainer = styled.ul`
   display: flex;
 `;
 export const LinkStyled = styled(NavLink)`
-  color: ${({ isActive }) => (isActive ? 'yellow' : '#fff')};
+  color: #fff;
   cursor: pointer;
   padding: 0 10px;
   text-decoration: none;
@@ -32,6 +32,10 @@ export const LinkStyled = styled(NavLink)`
   &:hover {
     color: yellow;
     text-decoration: underline;
+  }
+
+  &.active {
+    color: yellow;
   }
 `;
 

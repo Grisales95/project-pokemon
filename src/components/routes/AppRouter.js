@@ -1,38 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-} from 'react-router-dom';
-import { LoginContext } from '../../contexts/LoginProvider';
-import Favorites from '../../pages/Favorites';
-import Home from '../../pages/Home';
-import Login from '../../pages/Login';
-import Header from '../Home/Header/Header';
+} from "react-router-dom";
+import { AuthContext } from "../../auth/authContext";
+
+import Login from "../../pages/Login";
+
+import DashboardRoutes from "./DashboardRoutes";
 
 const AppRouter = () => {
-  const [isLogin] = useContext(LoginContext);
+  const { user } = useContext(AuthContext);
   return (
-    <>
-      {/* <Header /> */}
-      <Router>
-        <Header />
-        <Routes>
-          <Route
-            path='/'
-            element={isLogin ? <Navigate to='/home' /> : <Login />}
-          />
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={user.logged ? <Navigate to="/home" /> : <Login />}
+        />
 
-          <Route
-            path='/home'
-            element={isLogin ? <Home /> : <Navigate to='/' />}
-          />
-          <Route path='/favorites' element={<Favorites />} />
-          {/* <Route path="*" element={Error404} /> */}
-        </Routes>
-      </Router>
-    </>
+        <Route path="/*" element={<DashboardRoutes />} />
+
+        {/* <Route path="*" element={Error404} /> */}
+      </Routes>
+    </Router>
   );
 };
 

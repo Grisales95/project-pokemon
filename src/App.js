@@ -1,15 +1,18 @@
-import { useContext, useEffect } from 'react';
-import { LoginContext } from './contexts/LoginProvider';
-import { ThemeProvider } from 'styled-components';
-import './App.css';
-import AppRouter from './components/routes/AppRouter';
-import Theme from './components/Theme/Theme';
+import { useContext, useEffect } from "react";
+import { ThemeProvider } from "styled-components";
+import "./App.css";
+import { AuthContext } from "./auth/authContext";
+import AppRouter from "./components/routes/AppRouter";
+import Theme from "./components/Theme/Theme";
 
 function App() {
-  const [isLogin] = useContext(LoginContext);
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
+
   useEffect(() => {
-    localStorage.setItem('isLogin', JSON.stringify(isLogin));
-  }, [isLogin]);
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <ThemeProvider theme={Theme}>

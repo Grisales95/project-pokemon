@@ -1,8 +1,7 @@
-import React from 'react';
-import Header from '../components/Home/Header/Header';
+import React from "react";
 
 const Home = () => {
-  return <>{/* <Header /> */}nada</>;
+  return <>nada</>;
 };
 
 export default Home;
