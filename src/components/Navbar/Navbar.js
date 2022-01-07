@@ -1,28 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 
-import pokemonLogo from "../../assets/images/pokemon-logo.png";
-import { AuthContext } from "../../auth/authContext";
-import { types } from "../../types/types";
+import pokemonLogo from '../../assets/images/pokemon-logo.png';
+import pokemonsInitial from '../../assets/images/initial-pokemon.png';
+import { AuthContext } from '../../auth/authContext';
+import { types } from '../../types/types';
 
 import {
   HeaderStyled,
-  HomeContainer,
   LinkStyled,
   ListContainer,
   LogOut,
   NavBarStyled,
-} from "./Navbar.elements";
+  NavContainer,
+} from './Navbar.elements';
 const Navbar = () => {
   const { dispatch } = useContext(AuthContext);
   return (
     <>
       <HeaderStyled>
-        <HomeContainer>
+        <NavContainer>
           <NavBarStyled>
-            <img src={pokemonLogo} alt="pokemon-logo" width="120px" />
+            <img src={pokemonLogo} alt='pokemon-logo' width='180px' />
+            <img
+              src='http://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png'
+              alt='pikachu'
+              width='80px'
+              style={{ marginTop: '-10px' }}
+            />
             <ListContainer>
-              <LinkStyled to="/home"> Home</LinkStyled>
-              <LinkStyled to="/favorites">Favorites(0)</LinkStyled>
+              <LinkStyled to='/home'> Home</LinkStyled>
+              <LinkStyled to='/favorites'>Favorites(0)</LinkStyled>
               <LogOut
                 onClick={() => {
                   dispatch({
@@ -30,11 +37,11 @@ const Navbar = () => {
                   });
                 }}
               >
-                <i className="fas fa-sign-out-alt"></i>
+                <i className='fas fa-sign-out-alt'></i>
               </LogOut>
             </ListContainer>
           </NavBarStyled>
-        </HomeContainer>
+        </NavContainer>
       </HeaderStyled>
     </>
   );

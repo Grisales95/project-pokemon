@@ -5,12 +5,16 @@
   margin: 0;
 }
 
+html,
+body {
+  background-color: #f7f5f5;
+}
+
 li {
   text-decoration: none;
   list-style: none;
 }
 
-
-.link-active{
+.link-active {
   color: yellow;
 }
