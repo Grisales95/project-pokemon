@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
   /* background-color: ${({ theme }) => theme.primary};
    */
-  background-color: #c04c4b;
+  background-color: ${({ theme }) => theme.secondary};
   height: 90px;
   padding: 10px 0;
   width: 100%;

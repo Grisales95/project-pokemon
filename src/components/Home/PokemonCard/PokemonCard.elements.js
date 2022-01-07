@@ -1,10 +1,11 @@
-import styled from 'styled-components';
-import { ListContainer } from '../../Navbar/Navbar.elements';
+import styled from "styled-components";
+import { ListContainer } from "../../Navbar/Navbar.elements";
 
 export const ListPokemon = styled(ListContainer)`
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 50px 0;
+  justify-content: safe center;
+
+  margin: 50px auto;
 
   @media (max-width: 599px) {
     justify-content: center;
@@ -13,7 +14,7 @@ export const ListPokemon = styled(ListContainer)`
 
 export const PokemonCard = styled.li`
   align-items: center;
-  background-color: #fb6c6c;
+  background-color: ${({ background }) => background};
   border-radius: 25px;
   cursor: pointer;
   display: flex;
@@ -67,9 +68,6 @@ export const PokemonOrder = styled.div`
   right: 20px;
   top: 5px;
 `;
-
-// export const PokemonInfo = styled.div`
-// `
 
 export const PokemonImg = styled.img`
   height: 110px;
