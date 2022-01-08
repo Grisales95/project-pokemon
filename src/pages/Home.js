@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   ButtonContainer,
   ButtonPage,
@@ -7,6 +8,7 @@ import {
 } from "../components/Home/Home.elements";
 import PokemonCard from "../components/Home/PokemonCard/PokemonCard";
 import { ListPokemon } from "../components/Home/PokemonCard/PokemonCard.elements";
+
 import { usePokemons } from "../hooks/usePokemons";
 
 const Home = () => {
@@ -52,6 +54,7 @@ const Home = () => {
     setNameSearch(target.value.toLowerCase());
     setCurrentPage(0);
   };
+
   return (
     <HomeContainer>
       <InputPokemon

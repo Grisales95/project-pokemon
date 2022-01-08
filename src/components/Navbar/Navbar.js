@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import pokemonLogo from "../../assets/images/pokemon-logo.png";
 import pikachuLogo from "../../assets/images/580b57fcd9996e24bc43c325.png";
-import { AuthContext } from "../../auth/authContext";
 import { types } from "../../types/types";
 
 import {
@@ -13,8 +12,15 @@ import {
   NavBarStyled,
   NavContainer,
 } from "./Navbar.elements";
+import { AuthContext } from "../../context/authContext";
+import { FavoritesPokemonContext } from "../../context/favoritesPokemonContext";
 const Navbar = () => {
+  const { favoritesPokemon } = useContext(FavoritesPokemonContext);
+  useEffect(() => {
+    localStorage.setItem("fav-pokemons", JSON.stringify(favoritesPokemon));
+  }, [favoritesPokemon]);
   const { dispatch } = useContext(AuthContext);
+
   return (
     <>
       <HeaderStyled>
@@ -29,7 +35,9 @@ const Navbar = () => {
             />
             <ListContainer>
               <LinkStyled to="/home"> Home</LinkStyled>
-              <LinkStyled to="/favorites">Favorites(0)</LinkStyled>
+              <LinkStyled to="/favorites">
+                Favorites({favoritesPokemon.length})
+              </LinkStyled>
               <LogOut
                 onClick={() => {
                   dispatch({

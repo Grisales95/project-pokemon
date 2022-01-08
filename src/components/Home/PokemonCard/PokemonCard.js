@@ -6,7 +6,7 @@ const PokemonCard = ({ url }) => {
 
   return (
     <>
-      {isLoading && null} {pokemon && <PokemonItem pokemon={pokemon} />}
+      {isLoading && null} {pokemon && <PokemonItem pokemon={{ ...pokemon }} />}
     </>
   );
 };

@@ -9,25 +9,42 @@ import {
 } from "../PokemonCard/PokemonCard.elements";
 
 import pokeball from "../../../assets/images/pokeball-logo.png";
-import { useState } from "react/cjs/react.development";
+import { useContext } from "react/cjs/react.development";
 import { colorsType } from "../../../helpers/colorsTypes";
+import { FavoritesPokemonContext } from "../../../context/favoritesPokemonContext";
+import { types } from "../../../types/types";
 
 const PokemonItem = ({ pokemon }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { favoritesPokemon, dispatch } = useContext(FavoritesPokemonContext);
 
   if (!pokemon.types) {
     return null;
   }
 
+  console.log(pokemon);
+
   const color = colorsType[pokemon.types[0]?.type?.name];
+
+  const addTottlePokemonAction = () => {
+    dispatch({
+      type: types.addToggle,
+      payload: pokemon,
+    });
+  };
   return (
     <PokemonCard
       className="animate__animated animate__fadeIn"
       background={color}
     >
       <AddFavoriteIcon
-        onClick={() => setIsFavorite(!isFavorite)}
-        className={isFavorite ? "fas fa-heart" : "far fa-heart"}
+        onClick={addTottlePokemonAction}
+        className={
+          favoritesPokemon.length > 0
+            ? favoritesPokemon.map((poke) =>
+                poke.id === pokemon.id ? "fas fa-heart" : "far fa-heart"
+              )
+            : "far fa-heart"
+        }
       ></AddFavoriteIcon>
       <div>
         <PokemonName>{pokemon.name}</PokemonName>

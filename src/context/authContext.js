@@ -1,10 +1,10 @@
-import { createContext, useReducer } from 'react';
-import { authReducer } from './authReducer';
+import { createContext, useReducer } from "react";
+import { authReducer } from "../store/auth/authReducer";
 
 const AuthContext = createContext();
 
 const init = () => {
-  return JSON.parse(localStorage.getItem('user')) || { logged: false };
+  return JSON.parse(localStorage.getItem("user")) || { logged: false };
 };
 
 const LoggedProvider = ({ children }) => {
