@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ListContainer } from "../../Navbar/Navbar.elements";
+import styled from 'styled-components';
+import { ListContainer } from '../../Navbar/Navbar.elements';
 
 export const ListPokemon = styled(ListContainer)`
   flex-wrap: wrap;
@@ -90,7 +90,7 @@ export const PokeBallImg = styled.img`
 
 export const AddFavoriteIcon = styled.i`
   color: #fff;
-  // font-size: 1.2rem;
+  font-size: 1.2rem;
   left: 15px;
   position: absolute;
   top: 10px;

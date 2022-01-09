@@ -1,4 +1,4 @@
-import { types } from "../../types/types";
+import { types } from '../../types/types';
 
 export const favoritesPokemonReducer = (state = [], action) => {
   switch (action.type) {
@@ -8,6 +8,8 @@ export const favoritesPokemonReducer = (state = [], action) => {
         return state.filter((poke) => poke.id !== action.payload.id);
       }
       return [...state, { ...action.payload }];
+    case types.deleteAllPokemon:
+      return [];
     default:
       return state;
   }

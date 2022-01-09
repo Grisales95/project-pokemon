@@ -1,30 +1,47 @@
-import React from "react";
-import { useContext } from "react/cjs/react.development";
+import React from 'react';
+import { useContext } from 'react/cjs/react.development';
 import {
+  ButtonContainer,
   DeleteAllFavoritesButton,
   FavoritesContainer,
-} from "../components/Favorites/Favorites.elements";
+  NoFavoritesPokemon,
+} from '../components/Favorites/Favorites.elements';
 import {
   ListPokemon,
   PokemonCard,
-} from "../components/Home/PokemonCard/PokemonCard.elements";
-import PokemonItem from "../components/Home/PokemonItem/PokemonItem";
-import { FavoritesPokemonContext } from "../context/favoritesPokemonContext";
+} from '../components/Home/PokemonCard/PokemonCard.elements';
+import PokemonItem from '../components/Home/PokemonItem/PokemonItem';
+import { FavoritesPokemonContext } from '../context/favoritesPokemonContext';
+import { types } from '../types/types';
 
 const Favorites = () => {
-  const { favoritesPokemon } = useContext(FavoritesPokemonContext);
+  const { favoritesPokemon, dispatch } = useContext(FavoritesPokemonContext);
   return (
     <FavoritesContainer>
-      <DeleteAllFavoritesButton>Delete all Pokemons</DeleteAllFavoritesButton>
       <ListPokemon>
         {favoritesPokemon.length === 0 ? (
-          <p>you don't have favorite pokemon</p>
+          <NoFavoritesPokemon>
+            you don't have favorite pokemon...
+          </NoFavoritesPokemon>
         ) : (
-          <PokemonCard>
-            {favoritesPokemon.map((pokemon) => (
-              <PokemonItem pokemon={pokemon} />
-            ))}
-          </PokemonCard>
+          <>
+            <ButtonContainer>
+              <DeleteAllFavoritesButton
+                onClick={() =>
+                  dispatch({
+                    type: types.deleteAllPokemon,
+                  })
+                }
+              >
+                Delete all Pokemons
+              </DeleteAllFavoritesButton>
+            </ButtonContainer>
+            <PokemonCard>
+              {favoritesPokemon.map((pokemon) => (
+                <PokemonItem pokemon={pokemon} />
+              ))}
+            </PokemonCard>
+          </>
         )}
       </ListPokemon>
     </FavoritesContainer>
