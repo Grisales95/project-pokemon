@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 import {
   ButtonContainer,
   ButtonPage,
   HomeContainer,
   InputPokemon,
-} from "../components/Home/Home.elements";
-import PokemonCard from "../components/Home/PokemonCard/PokemonCard";
-import { ListPokemon } from "../components/Home/PokemonCard/PokemonCard.elements";
+} from '../components/Home/Home.elements';
+import PokemonCard from '../components/Home/PokemonCard/PokemonCard';
+import { ListPokemon } from '../components/Home/PokemonCard/PokemonCard.elements';
 
-import { usePokemons } from "../hooks/usePokemons";
+import { usePokemons } from '../hooks/usePokemons';
 
 const Home = () => {
-  const { isLoading, data: pokemons } = usePokemons("/pokemon?limit=750");
+  const { isLoading, data: pokemons } = usePokemons('/pokemon?limit=750');
   const [currentPage, setCurrentPage] = useState(0);
-  const [nameSearch, setNameSearch] = useState("");
+  const [nameSearch, setNameSearch] = useState('');
 
   if (!pokemons.results) {
     return null;
@@ -58,8 +58,8 @@ const Home = () => {
   return (
     <HomeContainer>
       <InputPokemon
-        type="text"
-        placeholder="search pokemon"
+        type='text'
+        placeholder='search pokemon'
         value={nameSearch}
         onChange={searchChange}
       />
@@ -75,7 +75,7 @@ const Home = () => {
         ))}
       </ListPokemon>
 
-      {isLoading && "Cargando..."}
+      {isLoading && 'Cargando...'}
     </HomeContainer>
   );
 };

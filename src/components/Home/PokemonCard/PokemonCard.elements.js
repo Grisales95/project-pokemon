@@ -24,7 +24,7 @@ export const PokemonCard = styled.li`
   position: relative;
   max-width: 250px;
   min-width: 250px;
-  min-height: 160px;
+  min-height: 170px;
   width: 50%;
 
   @media (max-width: 600px) {
@@ -48,10 +48,12 @@ export const PokemonName = styled.h3`
   color: #fff;
   font-weight: bold;
   margin-bottom: 10px;
+  text-decoration: underline;
 `;
 
 export const TypePokemon = styled.div`
-  background-color: rgba(255, 255, 255, 0.3);
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  background-color: ${({ bgColor }) => bgColor};
   border-radius: 15px;
   color: #fff;
   display: inline-block;
@@ -76,6 +78,7 @@ export const PokemonImg = styled.img`
   z-index: 1;
 
   &:hover {
+    filter: saturate(200%);
     transform: scale(1.2);
   }
 `;
@@ -93,10 +96,19 @@ export const AddFavoriteIcon = styled.i`
   font-size: 1.2rem;
   left: 15px;
   position: absolute;
-  top: 10px;
+  top: 6px;
   transition: all 0.2s;
 
   &:hover {
     transform: scale(1.2);
   }
+`;
+
+export const LinkButton = styled.button`
+  bottom: 6px;
+  border: none;
+  cursor: pointer;
+  border-radius: ${({ theme }) => theme.border};
+  padding: 5px 10px;
+  position: absolute;
 `;
