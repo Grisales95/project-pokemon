@@ -9,7 +9,7 @@ import {
 } from "../PokemonCard/PokemonCard.elements";
 
 import pokeball from "../../../assets/images/pokeball-logo.png";
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import { colorsIconsType, colorsType } from "../../../helpers/colorsTypes";
 import { FavoritesPokemonContext } from "../../../context/favoritesPokemonContext";
 import { types } from "../../../types/types";
