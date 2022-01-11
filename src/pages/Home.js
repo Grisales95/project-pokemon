@@ -8,13 +8,19 @@ import {
 } from '../components/Home/Home.elements';
 import PokemonCard from '../components/Home/PokemonCard/PokemonCard';
 import { ListPokemon } from '../components/Home/PokemonCard/PokemonCard.elements';
+import Paginator from '../components/Paginator/Paginator';
 
 import { usePokemons } from '../hooks/usePokemons';
 
 const Home = () => {
-  const { isLoading, data: pokemons } = usePokemons('/pokemon?limit=750');
-  const [currentPage, setCurrentPage] = useState(0);
+  const { isLoading, data: pokemons } = usePokemons('/pokemon?limit=800');
+  const [currentPage, setCurrentPage] = useState(1);
   const [nameSearch, setNameSearch] = useState('');
+  const [nextPageByName, setNextPageByName] = useState(12);
+
+  const perPage = 20;
+  const indexOfLastPoke = currentPage * perPage;
+  const indexOfFirstPoke = indexOfLastPoke - perPage;
 
   if (!pokemons.results) {
     return null;
@@ -23,36 +29,23 @@ const Home = () => {
   const filteredPokemons = () => {
     if (pokemons) {
       if (nameSearch.length === 0) {
-        return pokemons.results?.slice(currentPage, currentPage + 20);
+        return pokemons.results?.slice(indexOfFirstPoke, indexOfLastPoke);
       }
       const pokemonByName = pokemons.results?.filter((poke) =>
         poke.name.includes(nameSearch)
       );
-      return pokemonByName.slice(currentPage, currentPage + 20);
+      return pokemonByName.slice(0, nextPageByName);
     }
     return;
   };
 
-  const nextPage = () => {
-    if (
-      pokemons.results?.filter((poke) => poke.name.includes(nameSearch))
-        .length >
-      currentPage + 20
-    ) {
-      setCurrentPage(currentPage + 20);
-    }
-  };
-
-  const previousPage = () => {
-    if (currentPage === 0) {
-      return;
-    }
-    setCurrentPage(currentPage - 20);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   const searchChange = ({ target }) => {
     setNameSearch(target.value.toLowerCase());
-    setCurrentPage(0);
+    setCurrentPage(1);
   };
 
   return (
@@ -63,19 +56,26 @@ const Home = () => {
         value={nameSearch}
         onChange={searchChange}
       />
-
-      <ButtonContainer>
-        <ButtonPage onClick={() => previousPage()}>Previous</ButtonPage>
-        <ButtonPage onClick={() => nextPage()}>Next</ButtonPage>
-      </ButtonContainer>
-
+      {nameSearch.length === 0 && (
+        <Paginator
+          totalPokemons={pokemons.results.length}
+          perPage={perPage}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      )}
       <ListPokemon>
         {filteredPokemons().map((poke) => (
           <PokemonCard url={poke.url} key={poke.name} />
         ))}
       </ListPokemon>
+      {nameSearch.length > 0 && (
+        <ButtonContainer onClick={() => setNextPageByName(nextPageByName + 6)}>
+          <ButtonPage>Show more</ButtonPage>
+        </ButtonContainer>
+      )}
 
-      {isLoading && 'Cargando...'}
+      {isLoading && 'Loading...'}
     </HomeContainer>
   );
 };

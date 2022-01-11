@@ -56,7 +56,10 @@ const PokemonDetails = () => {
           <AbilitiesContainer>
             <Abilities>Abilities: </Abilities>
             {pokemon.abilities.map((poke) => (
-              <PokemonAbilities color={colorsType[types1]}>
+              <PokemonAbilities
+                color={colorsType[types1]}
+                key={poke.ability.name}
+              >
                 {poke.ability.name.toUpperCase()}
               </PokemonAbilities>
             ))}
@@ -96,8 +99,8 @@ const PokemonDetails = () => {
           </IconsTypeContainer>
           <Text>Base stats:</Text>
           <BaseStatsContainer>
-            {pokemon.stats.map((poke) => (
-              <PokemonStats color={colorsType[types1]}>
+            {pokemon.stats.map((poke, index) => (
+              <PokemonStats color={colorsType[types1]} key={index}>
                 {poke.stat.name.toUpperCase()}: {poke.base_stat}
               </PokemonStats>
             ))}

@@ -57,9 +57,7 @@ const PokemonItem = ({ pokemon }) => {
         ></AddFavoriteIcon>
 
         <div>
-          <Link to={`/pokemon/${pokemon.name}`} target='_blank'>
-            <PokemonName>{pokemon.name}</PokemonName>{' '}
-          </Link>
+          <PokemonName>{pokemon.name}</PokemonName>{' '}
           {pokemon.types && (
             <>
               <TypePokemon bgColor={color2}>
@@ -77,11 +75,16 @@ const PokemonItem = ({ pokemon }) => {
         <PokeBallImg src={pokeball} alt='poke-ball' />
         <PokemonOrder>#{pokemon.order}</PokemonOrder>
         {pokemon.sprites?.other.dream_world.front_default ? (
-          <PokemonImg src={pokemon.sprites?.other.dream_world.front_default} />
+          <Link to={`/pokemon/${pokemon.name}`} target='_blank'>
+            <PokemonImg
+              src={pokemon.sprites?.other.dream_world.front_default}
+            />
+          </Link>
         ) : (
-          <PokemonImg src={pokemon.sprites?.front_default} />
+          <Link to={`/pokemon/${pokemon.name}`} target='_blank'>
+            <PokemonImg src={pokemon.sprites?.front_default} />
+          </Link>
         )}
-        <LinkButton>Go</LinkButton>
       </PokemonCard>
     </>
   );

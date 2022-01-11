@@ -18,32 +18,30 @@ const Favorites = () => {
   const { favoritesPokemon, dispatch } = useContext(FavoritesPokemonContext);
   return (
     <FavoritesContainer>
-      <ListPokemon>
-        {favoritesPokemon.length === 0 ? (
-          <NoFavoritesPokemon>
-            you don't have favorite pokemon...
-          </NoFavoritesPokemon>
-        ) : (
-          <>
-            <ButtonContainer>
-              <DeleteAllFavoritesButton
-                onClick={() =>
-                  dispatch({
-                    type: types.deleteAllPokemon,
-                  })
-                }
-              >
-                Delete all Pokemons
-              </DeleteAllFavoritesButton>
-            </ButtonContainer>
-            <PokemonCard>
-              {favoritesPokemon.map((pokemon) => (
-                <PokemonItem pokemon={pokemon} />
-              ))}
-            </PokemonCard>
-          </>
-        )}
-      </ListPokemon>
+      {favoritesPokemon.length === 0 ? (
+        <NoFavoritesPokemon>
+          you don't have favorite pokemon...
+        </NoFavoritesPokemon>
+      ) : (
+        <>
+          <ButtonContainer>
+            <DeleteAllFavoritesButton
+              onClick={() =>
+                dispatch({
+                  type: types.deleteAllPokemon,
+                })
+              }
+            >
+              Delete all Pokemons
+            </DeleteAllFavoritesButton>
+          </ButtonContainer>
+          <ListPokemon flex={favoritesPokemon.length < 4 && true}>
+            {favoritesPokemon.map((pokemon) => (
+              <PokemonItem pokemon={pokemon} key={pokemon.name} />
+            ))}
+          </ListPokemon>
+        </>
+      )}
     </FavoritesContainer>
   );
 };

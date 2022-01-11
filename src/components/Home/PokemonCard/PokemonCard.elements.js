@@ -3,11 +3,11 @@ import { ListContainer } from '../../Navbar/Navbar.elements';
 
 export const ListPokemon = styled(ListContainer)`
   flex-wrap: wrap;
-  justify-content: safe center;
+  justify-content: ${({ flex }) => (flex ? 'flex-start' : 'space-between')};
 
   margin: 50px auto;
 
-  @media (max-width: 599px) {
+  @media (max-width: 730px) {
     justify-content: center;
   }
 `;
@@ -24,18 +24,13 @@ export const PokemonCard = styled.li`
   position: relative;
   max-width: 250px;
   min-width: 250px;
-  min-height: 170px;
+  min-height: 150px;
   width: 50%;
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     max-width: 320px;
-    width: 90%;
-  }
-
-  @media (max-width: 700px) and (min-width: 600px) {
-    margin: 10px 0;
-    min-width: 150px;
-    width: 49%;
+    min-width: 250px;
+    width: 60%;
   }
 
   @media (max-width: 1020px) and (min-width: 730px) {
@@ -48,11 +43,9 @@ export const PokemonName = styled.h3`
   color: #fff;
   font-weight: bold;
   margin-bottom: 10px;
-  text-decoration: underline;
 `;
 
 export const TypePokemon = styled.div`
-  /* background-color: rgba(255, 255, 255, 0.3); */
   background-color: ${({ bgColor }) => bgColor};
   border-radius: 15px;
   color: #fff;
@@ -75,7 +68,7 @@ export const PokemonImg = styled.img`
   height: 110px;
   width: 130px;
   transition: all 0.4s;
-  z-index: 1;
+  /* z-index: 100; */
 
   &:hover {
     filter: saturate(200%);
@@ -89,6 +82,7 @@ export const PokeBallImg = styled.img`
   position: absolute;
   right: 15px;
   width: 120px;
+  z-index: -1;
 `;
 
 export const AddFavoriteIcon = styled.i`
