@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ContainerBtnPaginator = styled.div`
   align-items: center;
@@ -9,7 +9,7 @@ export const ContainerBtnPaginator = styled.div`
 export const ButtonPaginator = styled.li`
   border: 2px solid ${({ theme }) => theme.secondary};
   border-radius: ${({ theme }) => theme.border};
-  color: ${({ active }) => active && '#fff'};
+  color: ${({ active, theme }) => (active ? "#fff" : theme.secondary)};
   background-color: ${({ active, theme }) => active && theme.secondary};
   cursor: pointer;
   margin: 0 2px;
@@ -23,6 +23,6 @@ export const ButtonPaginator = styled.li`
 
 export const IconPage = styled.i`
   cursor: pointer;
-  color: ${({ disabled }) => disabled && 'gray'};
+  color: ${({ disabled }) => disabled && "gray"};
   margin: 0 5px;
 `;

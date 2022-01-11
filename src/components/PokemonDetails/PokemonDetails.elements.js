@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ContainerFlexColumn = styled.div`
   display: flex;
@@ -143,9 +143,10 @@ export const IconsImg = styled.img`
 `;
 
 export const BaseStatsContainer = styled(ContainerFlexColumn)`
-  padding: 0 15px;
+  // align-items: end;
   border-left: 3px solid #fff;
   margin: 20px 0;
+  padding: 0 15px;
   width: 100%;
   @media (max-width: 1023px) and (min-width: 500px) {
     border-left: none;

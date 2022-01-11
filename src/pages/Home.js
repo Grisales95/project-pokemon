@@ -15,7 +15,10 @@ import Paginator from "../components/Paginator/Paginator";
 import { usePokemons } from "../hooks/usePokemons";
 
 const Home = () => {
-  const { isLoading, data: pokemons } = usePokemons("/pokemon?limit=800");
+  const [type, setType] = useState("fire");
+  const { isLoading, data: pokemons } = usePokemons(
+    type ? "/type/fire" : "/pokemon?limit=800"
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [nameSearch, setNameSearch] = useState("");
   const [nextPageByName, setNextPageByName] = useState(10);
@@ -27,11 +30,16 @@ const Home = () => {
   const filteredPokemons = () => {
     if (pokemons) {
       if (nameSearch.length === 0) {
-        return pokemons.results?.slice(indexOfFirstPoke, indexOfLastPoke);
+        return type
+          ? pokemons.pokemon?.slice(indexOfFirstPoke, indexOfLastPoke)
+          : pokemons.results?.slice(indexOfFirstPoke, indexOfLastPoke);
       }
-      const pokemonByName = pokemons.results?.filter((poke) =>
-        poke.name.includes(nameSearch)
-      );
+
+      const pokemonByName = type
+        ? pokemons.pokemon.filter((poke) =>
+            poke.pokemon.name.includes(nameSearch)
+          )
+        : pokemons.results.filter((poke) => poke.name.includes(nameSearch));
       return pokemonByName.slice(0, nextPageByName);
     }
     return;
@@ -48,7 +56,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
-      {pokemons.results ? (
+      {pokemons.results || pokemons.pokemon ? (
         <>
           <InputPokemon
             type="text"
@@ -58,16 +66,22 @@ const Home = () => {
           />
           {nameSearch.length === 0 && (
             <Paginator
-              totalPokemons={pokemons.results.length}
+              totalPokemons={
+                type ? pokemons.pokemon.length : pokemons.results.length
+              }
               perPage={perPage}
               paginate={paginate}
               currentPage={currentPage}
             />
           )}
           <ListPokemon flex={filteredPokemons.length < 4 && true}>
-            {filteredPokemons().map((poke) => (
-              <PokemonCard url={poke.url} key={poke.name} />
-            ))}
+            {type
+              ? filteredPokemons().map((poke) => (
+                  <PokemonCard url={poke.pokemon.url} key={poke.pokemon.name} />
+                ))
+              : filteredPokemons().map((poke) => (
+                  <PokemonCard url={poke.url} key={poke.name} />
+                ))}
           </ListPokemon>
           {nameSearch.length > 0 && (
             <ButtonContainer
