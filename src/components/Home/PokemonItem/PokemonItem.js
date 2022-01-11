@@ -1,21 +1,20 @@
 import {
   AddFavoriteIcon,
-  LinkButton,
   PokeBallImg,
   PokemonCard,
   PokemonImg,
   PokemonName,
   PokemonOrder,
   TypePokemon,
-} from '../PokemonCard/PokemonCard.elements';
+} from "../PokemonCard/PokemonCard.elements";
 
-import pokeball from '../../../assets/images/pokeball-logo.png';
-import { useContext } from 'react/cjs/react.development';
-import { colorsIconsType, colorsType } from '../../../helpers/colorsTypes';
-import { FavoritesPokemonContext } from '../../../context/favoritesPokemonContext';
-import { types } from '../../../types/types';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import pokeball from "../../../assets/images/pokeball-logo.png";
+import { useContext } from "react/cjs/react.development";
+import { colorsIconsType, colorsType } from "../../../helpers/colorsTypes";
+import { FavoritesPokemonContext } from "../../../context/favoritesPokemonContext";
+import { types } from "../../../types/types";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const PokemonItem = ({ pokemon }) => {
   const { favoritesPokemon, dispatch } = useContext(FavoritesPokemonContext);
@@ -42,7 +41,7 @@ const PokemonItem = ({ pokemon }) => {
   return (
     <>
       <PokemonCard
-        className='animate__animated animate__fadeIn'
+        className="animate__animated animate__fadeIn"
         background={color}
       >
         <AddFavoriteIcon
@@ -50,14 +49,14 @@ const PokemonItem = ({ pokemon }) => {
           className={
             favoritesPokemon.length > 0
               ? favoritesPokemon.map((poke) =>
-                  poke.id === pokemon.id ? 'fas fa-heart' : 'far fa-heart'
+                  poke.id === pokemon.id ? "fas fa-heart" : "far fa-heart"
                 )
-              : 'far fa-heart'
+              : "far fa-heart"
           }
         ></AddFavoriteIcon>
 
         <div>
-          <PokemonName>{pokemon.name}</PokemonName>{' '}
+          <PokemonName>{pokemon.name}</PokemonName>{" "}
           {pokemon.types && (
             <>
               <TypePokemon bgColor={color2}>
@@ -72,16 +71,16 @@ const PokemonItem = ({ pokemon }) => {
             </>
           )}
         </div>
-        <PokeBallImg src={pokeball} alt='poke-ball' />
+        <PokeBallImg src={pokeball} alt="poke-ball" />
         <PokemonOrder>#{pokemon.order}</PokemonOrder>
         {pokemon.sprites?.other.dream_world.front_default ? (
-          <Link to={`/pokemon/${pokemon.name}`} target='_blank'>
+          <Link to={`/pokemon/${pokemon.name}`} target="_blank">
             <PokemonImg
               src={pokemon.sprites?.other.dream_world.front_default}
             />
           </Link>
         ) : (
-          <Link to={`/pokemon/${pokemon.name}`} target='_blank'>
+          <Link to={`/pokemon/${pokemon.name}`} target="_blank">
             <PokemonImg src={pokemon.sprites?.front_default} />
           </Link>
         )}

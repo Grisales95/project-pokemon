@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState } from "react";
+import { TailSpin } from "react-loader-spinner";
+import { useParams } from "react-router-dom";
+import { LoaderContainer } from "../components/Loader/loader.elemets";
 import {
   IconsTypeBackground,
   IconsImg,
@@ -22,15 +24,19 @@ import {
   ShinyContainer,
   ShinyContainerImg,
   ContainerSizePokemon,
-} from '../components/PokemonDetails/PokemonDetails.elements';
-import { colorsIconsType, colorsType } from '../helpers/colorsTypes';
-import { usePokemons } from '../hooks/usePokemons';
+} from "../components/PokemonDetails/PokemonDetails.elements";
+import { colorsIconsType, colorsType } from "../helpers/colorsTypes";
+import { usePokemons } from "../hooks/usePokemons";
 const PokemonDetails = () => {
   const [id] = useState(useParams().id);
   const { data: pokemon } = usePokemons(`/pokemon/${id}`);
 
   if (!pokemon.types) {
-    return 'cargando...';
+    return (
+      <LoaderContainer>
+        <TailSpin />
+      </LoaderContainer>
+    );
   }
 
   const types1 = pokemon.types[0]?.type.name;
@@ -88,12 +94,12 @@ const PokemonDetails = () => {
         <StatsPokemonContainer>
           <IconsTypeContainer>
             <IconsTypeBackground bgIcon={colorsIconsType[types1]}>
-              <IconsImg src={iconType} alt='pokemon-type' />
+              <IconsImg src={iconType} alt="pokemon-type" />
             </IconsTypeBackground>
 
             {types2 && (
               <IconsTypeBackground bgIcon={colorsIconsType[types2]}>
-                <IconsImg src={iconType2} alt='pokemon-type' />
+                <IconsImg src={iconType2} alt="pokemon-type" />
               </IconsTypeBackground>
             )}
           </IconsTypeContainer>

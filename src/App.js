@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import "./App.css";
-// import { AuthContext } from "./auth/authContext";
 import AppRouter from "./components/routes/AppRouter";
 import { AuthContext } from "./context/authContext";
 import Theme from "./Theme/Theme";

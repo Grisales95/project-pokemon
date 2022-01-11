@@ -1,18 +1,15 @@
-import React from 'react';
-import { useContext } from 'react/cjs/react.development';
+import React from "react";
+import { useContext } from "react/cjs/react.development";
 import {
   ButtonContainer,
   DeleteAllFavoritesButton,
   FavoritesContainer,
   NoFavoritesPokemon,
-} from '../components/Favorites/Favorites.elements';
-import {
-  ListPokemon,
-  PokemonCard,
-} from '../components/Home/PokemonCard/PokemonCard.elements';
-import PokemonItem from '../components/Home/PokemonItem/PokemonItem';
-import { FavoritesPokemonContext } from '../context/favoritesPokemonContext';
-import { types } from '../types/types';
+} from "../components/Favorites/Favorites.elements";
+import { ListPokemon } from "../components/Home/PokemonCard/PokemonCard.elements";
+import PokemonItem from "../components/Home/PokemonItem/PokemonItem";
+import { FavoritesPokemonContext } from "../context/favoritesPokemonContext";
+import { types } from "../types/types";
 
 const Favorites = () => {
   const { favoritesPokemon, dispatch } = useContext(FavoritesPokemonContext);

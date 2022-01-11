@@ -9,7 +9,6 @@ import {
 import pokemonLogo from "../assets/images/pokemon-logo.png";
 import Input from "../components/Login/Input";
 import formValidator from "../helpers/formValidator";
-// import { AuthContext } from "../auth/authContext";
 import { types } from "../types/types";
 import { AuthContext } from "../context/authContext";
 

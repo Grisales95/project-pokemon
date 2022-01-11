@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { ListContainer } from '../../Navbar/Navbar.elements';
+import styled from "styled-components";
+import { ListContainer } from "../../Navbar/Navbar.elements";
 
 export const ListPokemon = styled(ListContainer)`
   flex-wrap: wrap;
-  justify-content: ${({ flex }) => (flex ? 'flex-start' : 'space-between')};
+  justify-content: ${({ flex }) => (flex ? "safe center" : "space-between")};
 
   margin: 50px auto;
 
