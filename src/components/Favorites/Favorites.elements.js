@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import { ButtonPage, HomeContainer } from '../Home/Home.elements';
+import styled from "styled-components";
+import { ButtonPage, HomeContainer } from "../Home/Home.elements";
 
 export const FavoritesContainer = styled(HomeContainer)`
   margin-top: 50px;
+  text-align: center;
 `;
 
 export const ButtonContainer = styled.div`

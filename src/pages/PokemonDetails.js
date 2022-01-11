@@ -86,10 +86,17 @@ const PokemonDetails = () => {
           </ShinyContainer>
         </PokemonDetailsInfo>
         <PokemonImageContainer>
-          <ImgPokemon
-            src={pokemon.sprites?.other.dream_world.front_default}
-            alt={pokemon.name}
-          />
+          {pokemon.sprites?.other.dream_world.front_default ? (
+            <ImgPokemon
+              src={pokemon.sprites?.other.dream_world.front_default}
+              alt={pokemon.name}
+            />
+          ) : (
+            <ImgPokemon
+              src={pokemon.sprites?.front_default}
+              alt={pokemon.name}
+            />
+          )}
         </PokemonImageContainer>
         <StatsPokemonContainer>
           <IconsTypeContainer>
