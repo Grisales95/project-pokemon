@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { pokemonApi } from "../api/PokemonApi";
+import { useEffect, useState } from 'react';
+import { pokemonApi } from '../api/PokemonApi';
 
 export const usePokemons = (url) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,5 +17,6 @@ export const usePokemons = (url) => {
   return {
     isLoading,
     data,
+    setData,
   };
 };

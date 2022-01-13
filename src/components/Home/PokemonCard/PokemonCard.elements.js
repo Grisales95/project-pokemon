@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { ListContainer } from "../../Navbar/Navbar.elements";
+import styled from 'styled-components';
+import { ListContainer } from '../../Navbar/Navbar.elements';
 
 export const ListPokemon = styled(ListContainer)`
   flex-wrap: wrap;
-  justify-content: ${({ flex }) => (flex ? "safe center" : "space-between")};
+  justify-content: ${({ flex }) => (flex ? 'safe center' : 'space-between')};
 
   margin: 50px auto;
 
@@ -22,7 +22,7 @@ export const PokemonCard = styled.li`
   margin: 10px;
   padding: 15px;
   position: relative;
-  max-width: 250px;
+  max-width: 260px;
   min-width: 250px;
   min-height: 150px;
   width: 50%;
@@ -68,7 +68,6 @@ export const PokemonImg = styled.img`
   height: 110px;
   width: 130px;
   transition: all 0.4s;
-  /* z-index: 100; */
 
   &:hover {
     filter: saturate(200%);
