@@ -69,32 +69,34 @@ const Home = () => {
             value={nameSearch}
             onChange={searchChange}
           />
-          <IconsContainer>
-            <img
-              src="https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-2.png"
-              alt="pokeball"
-              width="40px"
-              onClick={() => handleAllPokemonIcon()}
-              style={{ cursor: "pointer", margin: "5px" }}
-            />
-            {colorsType.map((icon) => (
-              <IconsType
-                icon={icon}
-                setType={setType}
-                key={icon.type}
-                setCurrentPage={setCurrentPage}
-              />
-            ))}
-          </IconsContainer>
           {nameSearch.length === 0 && (
-            <Paginator
-              totalPokemons={
-                type ? pokemons?.pokemon?.length : pokemons?.results?.length
-              }
-              perPage={perPage}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
+            <>
+              <IconsContainer>
+                <img
+                  src="https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-2.png"
+                  alt="pokeball"
+                  width="40px"
+                  onClick={() => handleAllPokemonIcon()}
+                  style={{ cursor: "pointer", margin: "5px" }}
+                />
+                {colorsType.map((icon) => (
+                  <IconsType
+                    icon={icon}
+                    setType={setType}
+                    key={icon.type}
+                    setCurrentPage={setCurrentPage}
+                  />
+                ))}
+              </IconsContainer>
+              <Paginator
+                totalPokemons={
+                  type ? pokemons?.pokemon?.length : pokemons?.results?.length
+                }
+                perPage={perPage}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </>
           )}
           <ListPokemon flex={filteredPokemons.length < 4 && true}>
             {type
