@@ -9,13 +9,19 @@ import {
 } from "../components/Home/Home.elements";
 import PokemonCard from "../components/Home/PokemonCard/PokemonCard";
 import { ListPokemon } from "../components/Home/PokemonCard/PokemonCard.elements";
+import IconsType from "../components/IconsType/IconsType";
+import { IconsContainer } from "../components/IconsType/IconsType.elements";
 import { LoaderContainer } from "../components/Loader/loader.elemets";
 import Paginator from "../components/Paginator/Paginator";
+import { colorsType } from "../helpers/iconsType";
 
 import { usePokemons } from "../hooks/usePokemons";
 
 const Home = () => {
-  const { isLoading, data: pokemons } = usePokemons("/pokemon?limit=800");
+  const [type, setType] = useState("");
+  const { isLoading, data: pokemons } = usePokemons(
+    type ? `/type/${type}` : "/pokemon?limit=800"
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [nameSearch, setNameSearch] = useState("");
   const [nextPageByName, setNextPageByName] = useState(10);
@@ -27,12 +33,14 @@ const Home = () => {
   const filteredPokemons = () => {
     if (pokemons) {
       if (nameSearch.length === 0) {
-        return pokemons.results?.slice(indexOfFirstPoke, indexOfLastPoke);
+        return type
+          ? pokemons.pokemon?.slice(indexOfFirstPoke, indexOfLastPoke)
+          : pokemons.results?.slice(indexOfFirstPoke, indexOfLastPoke);
       }
-      const pokemonByName = pokemons.results?.filter((poke) =>
-        poke.name.includes(nameSearch)
-      );
-      return pokemonByName.slice(0, nextPageByName);
+      const pokemonByName =
+        pokemons.results &&
+        pokemons.results.filter((poke) => poke.name.includes(nameSearch));
+      return pokemons.results && pokemonByName.slice(0, nextPageByName);
     }
     return;
   };
@@ -42,13 +50,18 @@ const Home = () => {
   };
 
   const searchChange = ({ target }) => {
+    setType("");
     setNameSearch(target.value.toLowerCase());
     setCurrentPage(1);
   };
 
+  const handleAllPokemonIcon = () => {
+    setType("");
+    setCurrentPage(1);
+  };
   return (
     <HomeContainer>
-      {pokemons.results ? (
+      {pokemons.results || pokemons.pokemon ? (
         <>
           <InputPokemon
             type="text"
@@ -57,23 +70,48 @@ const Home = () => {
             onChange={searchChange}
           />
           {nameSearch.length === 0 && (
-            <Paginator
-              totalPokemons={pokemons.results.length}
-              perPage={perPage}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
+            <>
+              <IconsContainer>
+                <img
+                  src="https://imagenpng.com/wp-content/uploads/2016/09/Pokebola-pokeball-png-2.png"
+                  alt="pokeball"
+                  width="40px"
+                  onClick={() => handleAllPokemonIcon()}
+                  style={{ cursor: "pointer", margin: "5px" }}
+                />
+                {colorsType.map((icon) => (
+                  <IconsType
+                    icon={icon}
+                    setType={setType}
+                    key={icon.type}
+                    setCurrentPage={setCurrentPage}
+                  />
+                ))}
+              </IconsContainer>
+              <Paginator
+                totalPokemons={
+                  type ? pokemons?.pokemon?.length : pokemons?.results?.length
+                }
+                perPage={perPage}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </>
           )}
           <ListPokemon flex={filteredPokemons.length < 4 && true}>
-            {filteredPokemons().map((poke) => (
-              <PokemonCard url={poke.url} key={poke.name} />
-            ))}
+            {type
+              ? filteredPokemons()?.map((poke) => (
+                  <PokemonCard url={poke.pokemon.url} key={poke.pokemon.name} />
+                ))
+              : filteredPokemons()?.map((poke) => (
+                  <PokemonCard url={poke.url} key={poke.name} />
+                ))}
           </ListPokemon>
           {nameSearch.length > 0 && (
-            <ButtonContainer
-              onClick={() => setNextPageByName(nextPageByName + 5)}
-            >
-              <ButtonPage>Show more</ButtonPage>
+            <ButtonContainer>
+              <ButtonPage onClick={() => setNextPageByName(nextPageByName + 5)}>
+                Show more
+              </ButtonPage>
             </ButtonContainer>
           )}
         </>

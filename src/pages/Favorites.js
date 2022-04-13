@@ -31,7 +31,7 @@ const Favorites = () => {
               Delete all Pokemons
             </DeleteAllFavoritesButton>
           </ButtonContainer>
-          <ListPokemon flex={favoritesPokemon.length < 4 && true}>
+          <ListPokemon flex={favoritesPokemon.length < 5 && true}>
             {favoritesPokemon.map((pokemon) => (
               <PokemonItem pokemon={pokemon} key={pokemon.name} />
             ))}
